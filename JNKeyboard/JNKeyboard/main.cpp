@@ -3,21 +3,20 @@
 #include <string>
 #include "resource.h"
 #pragma comment(lib, "winmm")
-#pragma comment( linker, "/subsystem:windows /entry:mainCRTStartup" )
+#pragma comment(linker, "/subsystem:windows /entry:mainCRTStartup")
 
-// 将应用程序路径写入注册表，使它在 Windows 启动时自动运行
+//将应用程序路径写入注册表，使它在Windows启动时自动运行
 void SetStartup(std::wstring path)
 {
 	HKEY hKey;
-	LONG lResult = RegOpenKeyExW(HKEY_CURRENT_USER, L"Software\\Microsoft\\Windows\\CurrentVersion\\Run", 0, KEY_SET_VALUE, &hKey);
-	if (lResult != ERROR_SUCCESS)
-		return;
-
-	lResult = RegSetValueExW(hKey, L"JNKeyboard", 0, REG_SZ, reinterpret_cast<const BYTE*>(path.c_str()), static_cast<DWORD>((path.length() + 1) * sizeof(wchar_t)));
-	if (lResult != ERROR_SUCCESS)
-		return;
-
-	RegCloseKey(hKey);
+	// Open the HKCU\Software\Microsoft\Windows\CurrentVersion\Run key
+	if (RegOpenKeyExW(HKEY_CURRENT_USER, L"Software\Microsoft\Windows\CurrentVersion\Run", 0, KEY_SET_VALUE, &hKey) == ERROR_SUCCESS)
+	{
+		// Set the value of the key to the path of the application
+		RegSetValueExW(hKey, L"JNKeyboard", 0, REG_SZ, (BYTE*)path.c_str(), (path.size() + 1) * sizeof(wchar_t));
+		// Close the key
+		RegCloseKey(hKey);
+	}
 }
 int main()
 {
@@ -25,7 +24,7 @@ int main()
 	wchar_t buffer[MAX_PATH];
 	GetModuleFileNameW(NULL, buffer, MAX_PATH);
 	std::wstring path(buffer);
-	// 将应用程序路径写入注册表
+	//将应用程序路径导入注册表
 	SetStartup(path);
 	while (true)
 	{

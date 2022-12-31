@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{7C0BB3C2-4EF4-4344-9C1C-61594873EA11}</ProjectGuid>
+    <ProjectGuid>{1EB5CCFA-06E6-49FB-8317-B39EF1FC2A8D}</ProjectGuid>
     <RootNamespace>JNKeyboard</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -123,25 +123,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="JNKeyboard.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="..\..\t.wav" />
-    <Media Include="..\ctrl.wav" />
-    <Media Include="..\j.wav" />
-    <Media Include="..\jntm.wav" />
-    <Media Include="..\m.wav" />
-    <Media Include="..\n.wav" />
-    <Media Include="..\t.wav" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\icon.ico" />
+    <Media Include="ctrl.wav" />
+    <Media Include="j.wav" />
+    <Media Include="jntm.wav" />
+    <Media Include="m.wav" />
+    <Media Include="n.wav" />
+    <Media Include="t.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
